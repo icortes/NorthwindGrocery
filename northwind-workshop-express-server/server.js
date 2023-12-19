@@ -67,7 +67,12 @@ app.get("/api/products/:productId", function (request, response) {
     console.log("Returning: ");
     console.log(matchingProduct);
 
-    response.status(200).json(matchingProduct);
+    if (matchingProduct === undefined) {
+        response.status(404).json();
+    }
+    else {
+        response.status(200).json(matchingProduct);
+    }
 });
 
 

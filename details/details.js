@@ -1,7 +1,12 @@
-"use strict"
+'use strict';
 
 onload = async () => {
   let response = await fetch(`http://localhost:8081/api/products/${productId}`);
+  console.log(response);
+
+  if (!response.ok) {
+    window.location.replace('/');
+  }
   let product = await response.json();
   console.log(product);
 
@@ -26,5 +31,5 @@ onload = async () => {
               </div>
             </div>
           </div>
-        </div>`
-}
+        </div>`;
+};

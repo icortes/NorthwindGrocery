@@ -5,7 +5,7 @@ function displayProducts(products) {
   productsEl.innerHTML = '';
   products.forEach((product) => {
     productsEl.innerHTML += `<div class="col-12 col-sm-6 col-md-6 col-lg-4">
-          <div class="card mb-3">
+          <div class="card mb-3 h-100">
             <div class="row g-0">
               <div class="col-md-6">
                 <div class="card-body">
@@ -13,7 +13,7 @@ function displayProducts(products) {
                   <h6 class="card-subtitle mb-2 text-body-secondary">Supplier: ${
                     product.supplier
                   }</h6>
-                  <a href="/details/?productId=${product.productId}" class="text-decoration-none">See details</a>
+                  <a href="/details/?productId=${product.productId}" class="text-decoration-none stretched-link">See details</a>
                 </div>
               </div>
               <div class="col-md-6">
@@ -32,6 +32,7 @@ function displayProducts(products) {
 
 function displayCategoryDropdown(categories) {
   let categoriesEl = document.getElementById('categories');
+  categoriesEl.innerHTML = "";
   categoriesEl.classList.remove('d-none');
   categoriesEl.appendChild(new Option('Select one...', '-1', true));
   categories.forEach((category) =>
@@ -62,11 +63,13 @@ onload = async () => {
 
     switch (selected) {
       case 'all':
+        document.getElementById('main').style.height = "100%";
         res = await fetch('http://localhost:8081/api/products');
         let products = await res.json();
         displayProducts(products);
         break;
       case 'category':
+        document.getElementById('main').style.height = "100vh";
         res = await fetch('http://localhost:8081/api/categories');
         let categories = await res.json();
         displayCategoryDropdown(categories);
